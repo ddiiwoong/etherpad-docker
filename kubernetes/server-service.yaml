@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: etherpad-server
+spec:
+  type: LoadBalancer
+  ports:
+  - name: "9001"
+    port: 9001
+    targetPort: 9001
+  selector:
+    app: etherpad-server

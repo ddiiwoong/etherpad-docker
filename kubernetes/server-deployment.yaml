@@ -1,0 +1,36 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: etherpad-server
+spec:
+  replicas: 1
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: etherpad-server
+    spec:
+      containers:
+      - env:
+        - name: ETHERPAD_ADMIN_PASSWORD
+          value: "!Etherpad00"
+        image: fuerst/etherpad-docker:stable
+        name: server
+        ports:
+        - containerPort: 9001
+        resources: {}
+        volumeMounts:
+        - mountPath: /opt/etherpad-lite/var
+          name: server-claim0
+        - mountPath: /opt/etherpad-lite/node-modules
+          name: server-claim1
+      restartPolicy: Always
+      volumes:
+      - name: server-claim0
+        persistentVolumeClaim:
+          claimName: server-claim0
+      - name: server-claim1
+        persistentVolumeClaim:
+          claimName: server-claim1
+status: {}
