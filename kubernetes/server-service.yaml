@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: etherpad-server
 spec:
-  type: LoadBalancer
+  type: ClusterIP
   ports:
   - name: "9001"
     port: 9001

@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: etherpad-ingress
+  namespace: default
+spec:
+  rules:
+  - host: ep.ddii.kr
+    http:
+      paths:
+      - backend:
+          serviceName: etherpad-server
+          servicePort: 9001 
+        path: /
